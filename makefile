@@ -1,13 +1,49 @@
-ALL =  sizeof sizeof2 sizeof3 sizeof4 sizeof5 sizeof6 base-derived-1 base-derived-2 test1 test1-virtual \
-	assignment-op overload-op copy-ctor
+
+ALL = \
+	assignment-op \
+	base-derived-1 \
+	base-derived-2 \
+	book \
+	copy-ctor \
+	derived-class \
+	fmt-width \
+	i \
+	inheritance \
+	mi-1 \
+	mi-1a \
+	mi-2 \
+	mi-3 \
+	mi-4 \
+	mi-5 \
+	mi-6 \
+	mi-7 \
+	mi-diamond \
+	overload-op \
+	parms \
+	printf \
+	sizeof2 \
+	sizeof3 \
+	sizeof4 \
+	sizeof5 \
+	sizeof6 \
+	sizeof \
+	test1 \
+	test1-virtual \
+	w5-copy-ctor \
 
 all : $(ALL)
 
+CXX = g++-4.8
+CXXFLAGS = -ggdb -std=c++0x -Wall 
+
+parms: parms.cpp x.h x.cpp
+	$(CXX) parms.cpp  x.cpp -o parms
+
 test1: test1.cpp
-	g++ test1.cpp -o test1
+	$(CXX) test1.cpp -o test1
 
 test1-virtual: test1.cpp
-	g++ -DVIRTUAL test1.cpp -o test1-virtual
+	$(CXX) -DVIRTUAL test1.cpp -o test1-virtual
 
 
 clean:
