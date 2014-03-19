@@ -14,12 +14,44 @@ protected:
   bool rangeValid(int x, int lo, int hi);
 };
 
-Phone::Phone(int _areaCode, int _number) { areaCode = _areaCode; number = _number; }
-void Phone::set(int _areaCode,int _number) { areaCode = _areaCode; number = _number; }
-void Phone::get(int& _areaCode,int& _number)const  { _areaCode = areaCode; _number = number; }
-void Phone::display(std::ostream& s) const { s << areaCode << '-' << number/10000 << '-' << number % 10000; }
-bool Phone::rangeValid(int x, int lo, int hi) { return lo <= x && x <= hi; }
-bool Phone::isValid() { return rangeValid(areaCode, 100, 999) && rangeValid(number, 1000000, 9999999); }
+Phone::Phone(int _areaCode, int _number) 
+      : areaCode(_areaCode), number(_number)
+{ 
+}
+void Phone::set(int _areaCode,int _number) 
+{ 
+    areaCode = _areaCode; 
+    number = _number; 
+}
+void Phone::get(int& _areaCode,int& _number)const  
+{ 
+    _areaCode = areaCode; 
+    _number = number; 
+}
+void Phone::display(std::ostream& s) const 
+{ 
+    s << areaCode << '-' << number/10000 << '-' << number % 10000; 
+}
+bool Phone::rangeValid(int x, int lo, int hi) 
+{ 
+    return lo <= x && x <= hi; 
+}
+bool Phone::isValid() 
+{ 
+    return rangeValid(areaCode, 100, 999) && rangeValid(number, 1000000, 9999999); 
+}
+std::istream& operator>>(std::istream& stream, Phone& p)           // reads p from stream
+{
+    int ac, n;
+    stream >> ac >> n;
+    p.set(ac,n);
+    return stream;
+}
+std::ostream& operator<<(std::ostream& stream, const Phone& p)     // writes p to stream
+{
+    p.display(stream);
+    return stream;
+}
 
 //////////////////////////////////////////////////
 
@@ -34,43 +66,32 @@ private:
   int country;
 };
 
-IntlPhone::IntlPhone(int _country, int _areaCode, int _number) :Phone(_areaCode,_number) 
+IntlPhone::IntlPhone(int _country, int _areaCode, int _number) 
+   :Phone(_areaCode,_number), country(_country) 
 { 
-    country  = _country; 
 }
-
 void IntlPhone::set(int  _country,int  _areaCode,int  _number) 
 { 
     country = _country; 
     Phone::set(_areaCode, _number); 
 }
-
 void IntlPhone::get(int& _country,int& _areaCode,int& _number) const 
 { 
     _country = country;  
     Phone::get(_areaCode, _number); 
 }
-
 bool IntlPhone::isValid() 
 { 
     return rangeValid(country, 1,999) && Phone::isValid(); 
 }
-
 void IntlPhone::display(std::ostream& s) const 
 { 
     s.width(2); 
     s << country << '-'; Phone::display(s); 
 }
 
-std::istream& operator>>(std::istream& stream, Phone& p)           //  - extracts data from standard input and stores it in p
-{
-    int ac, n;
-    stream >> ac >> n;
-    p.set(ac,n);
-    return stream;
-}
 
-std::istream& operator>>(std::istream& stream, IntlPhone& p)       //  - extracts data from standard input and stores it in p
+std::istream& operator>>(std::istream& stream, IntlPhone& p)       // reads p from stream
 {
     int c, ac, n;
     stream >> c >> ac >> n;
@@ -78,13 +99,8 @@ std::istream& operator>>(std::istream& stream, IntlPhone& p)       //  - extract
     return stream;
 }
 
-std::ostream& operator<<(std::ostream& stream, const Phone& p)     //  - inserts data from p into standard output
-{
-    p.display(stream);
-    return stream;
-}
 
-std::ostream& operator<<(std::ostream& stream, const IntlPhone& p) //  - inserts data from p into standard output
+std::ostream& operator<<(std::ostream& stream, const IntlPhone& p) // writes p to stream
 {
     p.display(stream);
     return stream;

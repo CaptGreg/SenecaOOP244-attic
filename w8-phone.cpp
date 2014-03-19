@@ -64,15 +64,15 @@ int main2(int argc, char **argv) {
 
 #include <fstream>
 int main3(int argc, char**argv) {
-    int  n = 0; // , country, code, local; // GB **unused**
+    int  n = 0;
     IntlPhone temp, phone[MAX_NO];
 
     // 1st parameter argv[0] is pgm name
     // 2nd parameter argv[1] is input file name
     // 3rd parameter argv[2] is output file name
-    if(argc > 1) { // argc is 2 or more
+    if(argc > 1 && *argv[1] != '-') { // argc is 2 or more
         std::ifstream fin;
-        fin.open(argv[1]); // [1] is our input file name
+        fin.open(argv[1]); // argv[1] is input file name
         if(fin.is_open()) {
             do {
                 fin >> temp;
@@ -82,8 +82,9 @@ int main3(int argc, char**argv) {
             fin.close();
         }
     } else {
-        std::cout << "enter international phone numbers\n";
-        std::cout << std::endl;
+        std::cout << "enter international phone numbers:\n"
+                     "  country areacode number\n"
+                     "  0 0 0 when finished\n\n";
         do {
             std::cin >> temp;
             if (temp.isValid())
@@ -92,11 +93,11 @@ int main3(int argc, char**argv) {
     }
 
 
-    if(argc > 2) { // argc is 3 or more
+    if(argc > 2 && *argv[2] != '-') { // argc is 3 or more
         std::ofstream fout;
-        fout.open(argv[2]); // [2] is our output file name
+        fout.open(argv[2]); // argv[2] is output file name
         if(fout.is_open()) {
-            fout << n << " international phone numbers entered\n";
+            fout << n << " international phone numbers\n";
             fout << "Telephone List\n";
             fout << "==============\n";
             for (int i = 0; i < n; i++)
@@ -104,7 +105,7 @@ int main3(int argc, char**argv) {
             fout.close();
         }
     } else {
-        std::cout << n << " international phone numbers entered\n";
+        std::cout << n << " international phone numbers\n";
         std::cout << "Telephone List\n";
         std::cout << "==============\n";
         for (int i = 0; i < n; i++)

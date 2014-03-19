@@ -31,6 +31,7 @@ ALL = \
 	w5-copy-ctor \
 	cppcallc \
 	cmdline \
+    w8-phone \
 
 all : $(ALL)
 
@@ -46,12 +47,13 @@ test1: test1.cpp
 test1-virtual: test1.cpp
 	$(CXX) -DVIRTUAL test1.cpp -o test1-virtual
 
-
 cppcallc  : cppcallc.cpp cfun.h cfun.c
 	g++ -c cppcallc.cpp
 	gcc -c cfun.c
 	g++ cppcallc.o cfun.o -o cppcallc
 
+w8-phone : w8-phone.cpp w8-phone.h
+	$(CXX) $(CFLAGS) w8-phone.cpp -o w8-phone
 
 clean:
 	-rm $(ALL) *.o
