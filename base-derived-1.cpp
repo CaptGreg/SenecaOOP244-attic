@@ -251,6 +251,7 @@ class Polygon {
     int width, height;
   public:
     Polygon (int a, int b) : width(a), height(b) {}
+    virtual ~Polygon () {}      // abstract class requires a virtual destructor
     virtual int area (void) =0;
     void printarea()
       { cout << this->area() << '\n'; }
