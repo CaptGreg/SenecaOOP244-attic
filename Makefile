@@ -31,7 +31,15 @@ ALL = \
 	w5-copy-ctor \
 	cppcallc \
 	cmdline \
-    w8-phone \
+	w8-phone \
+	args \
+	pm-2 \
+	args \
+	cmdline \
+	printf \
+	w8-phone \
+
+
 
 all : $(ALL)
 

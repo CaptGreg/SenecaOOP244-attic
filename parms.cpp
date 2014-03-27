@@ -3,11 +3,11 @@ using namespace std;
 
 #include "x.h"
 
-void y1(int  x) {  x = 27; cout << "inside y1 x = " << x << endl; }
-void y2(int *x) { *x = 37; cout << "inside y2 x = " << *x << endl; }
-void y3(int &x) {  x = 47; cout << "inside y3 x = " << x << endl; }
+void y1(int  x) {  x = 27; cout << "inside y1  x = " <<  x << endl; }
+void y2(int *x) { *x = 37; cout << "inside y2 *x = " << *x << endl; }
+void y3(int &x) {  x = 47; cout << "inside y3  x = " <<  x << endl; }
 
-int main(int argc, char **arg)
+int main(int argc, char **arg, char **env)
 {
 	int x = 19;
 
